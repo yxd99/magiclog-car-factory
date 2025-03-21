@@ -9,14 +9,16 @@ class Car
     private string $model;
     private int $year;
     private float $price;
+    private string $color;
 
-    public function __construct(int $id, string $brand, string $model, int $year, float $price)
+    public function __construct(int $id, string $brand, string $model, int $year, float $price, string $color)
     {
         $this->id = $id;
         $this->brand = $brand;
         $this->model = $model;
         $this->year = $year;
         $this->price = $price;
+        $this->color = $color;
     }
 
     public function getId(): int
@@ -44,6 +46,11 @@ class Car
         return $this->price;
     }
 
+    public function getColor(): float
+    {
+        return $this->color;
+    }
+
     public function toArray(): array
     {
         return [
@@ -52,6 +59,7 @@ class Car
             'model' => $this->model,
             'year' => $this->year,
             'price' => $this->price,
+            'color' => $this->color
         ];
     }
 }

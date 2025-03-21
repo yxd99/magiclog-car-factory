@@ -10,17 +10,24 @@ class CarRepository implements CarRepositoryInterface
 {
     public function findAll(int $page, int $size): array
     {
-        $paginator = CarModel::paginate($size, ['*'], 'page', $page);
+        $paginator = CarModel::orderBy('created_at', 'desc')->paginate($size, ['*'], 'page', $page);
 
-        return array_map(function ($car) {
-            return (new Car(
-                $car->id,
-                $car->brand,
-                $car->model,
-                $car->year,
-                $car->price
-            ))->toArray();
-        }, $paginator->items());
+        return [
+            'data' => array_map(function ($car) {
+                return (new Car(
+                    $car->id,
+                    $car->brand,
+                    $car->model,
+                    $car->year,
+                    $car->price,
+                    $car->color
+                ))->toArray();
+            }, $paginator->items()),
+            'total' => $paginator->total(),
+            'per_page' => $paginator->perPage(),
+            'current_page' => $paginator->currentPage(),
+            'last_page' => $paginator->lastPage(),
+        ];
     }
 
 
@@ -36,7 +43,8 @@ class CarRepository implements CarRepositoryInterface
             $car->brand,
             $car->model,
             $car->year,
-            $car->price
+            $car->price,
+            $car->color
         );
     }
 
@@ -49,7 +57,8 @@ class CarRepository implements CarRepositoryInterface
             $car->brand,
             $car->model,
             $car->year,
-            $car->price
+            $car->price,
+            $car->color
         );
     }
 
@@ -63,7 +72,8 @@ class CarRepository implements CarRepositoryInterface
             $car->brand,
             $car->model,
             $car->year,
-            $car->price
+            $car->price,
+            $car->color
         );
     }
 
