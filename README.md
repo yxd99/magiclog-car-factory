@@ -24,12 +24,12 @@ This project follows Clean Architecture principles with a clear separation of co
 
 ## Requirements
 
-- Docker and Docker Compose
 - PHP 8.2+
 - Composer
 - Node.js and NPM
+- MySQL 8.0+
 
-## Development Setup
+## Local Development Setup
 
 1. Clone the repository:
    ```bash
@@ -42,28 +42,85 @@ This project follows Clean Architecture principles with a clear separation of co
    cp .env.example .env
    ```
 
-3. Start Docker containers:
+3. Configure your .env file with your local database settings:
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=magiclog_car_factory
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
+   ```
+
+4. Install PHP dependencies:
+   ```bash
+   composer install
+   ```
+
+5. Install Node.js dependencies:
+   ```bash
+   npm install
+   ```
+
+6. Generate application key:
+   ```bash
+   php artisan key:generate
+   ```
+
+7. Run database migrations:
+   ```bash
+   php artisan migrate
+   ```
+
+8. Build assets:
+   ```bash
+   npm run dev
+   ```
+
+9. Start the development server:
+   ```bash
+   php artisan serve
+   ```
+
+The application will be available at http://localhost:8000
+
+## Docker Development Setup
+
+1. Make sure you have Docker and Docker Compose installed
+
+2. Clone the repository and navigate to the project directory:
+   ```bash
+   git clone https://github.com/yxd99/magiclog-car-factory.git
+   cd magiclog-car-factory
+   ```
+
+3. Copy environment file:
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Start Docker containers:
    ```bash
    docker-compose up -d
    ```
 
-4. Install dependencies:
+5. Install dependencies:
    ```bash
    docker-compose exec app composer install
    npm install
    ```
 
-5. Generate application key:
+6. Generate application key:
    ```bash
    docker-compose exec app php artisan key:generate
    ```
 
-6. Run migrations:
+7. Run migrations:
    ```bash
    docker-compose exec app php artisan migrate
    ```
 
-7. Build assets:
+8. Build assets:
    ```bash
    npm run dev
    ```
