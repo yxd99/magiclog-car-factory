@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;use App\Http\Controllers\UsersController;
- 
-Route::resource('/cars', App\Http\Controllers\CarController::class);
-Route::get('/', function () {
-    return redirect('/cars'); 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarController;
+
+Route::resource('/cars', CarController::class);
+Route::fallback(function () {
+    return redirect('/cars');
 });

@@ -22,11 +22,11 @@ class CarRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'brand' => 'string',
-			'model' => 'string',
-			'color' => 'string',
-            'year' => 'integer',
-            'price' => 'numeric|regex:/^\d+(\.\d{1,2})?$/',
+			'brand' => 'required|string|max:30',
+			'model' => 'required|string',
+			'color' => 'required|string|max:50',
+            'year' => 'required|integer|gte:1900|lte:3000',
+            'price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/|gt:0',
         ];
     }
 }
