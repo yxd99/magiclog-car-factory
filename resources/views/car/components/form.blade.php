@@ -3,27 +3,27 @@
         
         <div class="form-group mb-2 mb20">
             <label for="brand" class="form-label">Marca</label>
-            <input type="text" name="brand" class="form-control @error('brand') is-invalid @enderror" value="{{ old('brand', $car?->brand) }}" id="brand" placeholder="Brand">
+            <input minlength="1" maxlength="30" type="text" name="brand" class="form-control @error('brand') is-invalid @enderror" value="{{ old('brand', $car?->brand) }}" id="brand" placeholder="Marca" require>
             {!! $errors->first('brand', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
             <label for="model" class="form-label">Modelo</label>
-            <input type="text" name="model" class="form-control @error('model') is-invalid @enderror" value="{{ old('model', $car?->model) }}" id="model" placeholder="Model">
+            <input minlength="1" maxlength="50" type="text" name="model" class="form-control @error('model') is-invalid @enderror" value="{{ old('model', $car?->model) }}" id="model" placeholder="Modelo" require>
             {!! $errors->first('model', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
             <label for="year" class="form-label">Año</label>
-            <input type="number" name="year" class="form-control @error('year') is-invalid @enderror" value="{{ old('year', $car?->year) }}" id="year" placeholder="Year">
+            <input min="1900" max="3000" type="number" name="year" class="form-control @error('year') is-invalid @enderror" value="{{ old('year', $car?->year) }}" id="year" placeholder="Año" require>
             {!! $errors->first('year', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
             <label for="color" class="form-label">Color</label>
-            <input type="text" name="color" class="form-control @error('color') is-invalid @enderror" value="{{ old('color', $car?->color) }}" id="color" placeholder="Color">
+            <input minlength="1" maxlength="50" type="text" name="color" class="form-control @error('color') is-invalid @enderror" value="{{ old('color', $car?->color) }}" id="color" placeholder="Color" require>
             {!! $errors->first('color', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
             <label for="price" class="form-label">Precio</label>
-            <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $car?->price) }}" id="price" placeholder="Price">
+            <input min="0" type="number" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $car?->price) }}" id="price" placeholder="Precio" require>
             {!! $errors->first('price', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
 
