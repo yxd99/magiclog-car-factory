@@ -1,9 +1,8 @@
-FROM php:8.2-fpm
+FROM php:8.3-fpm
 
 ARG user=www-data
 ARG uid=1000
 
-# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -13,21 +12,31 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip
 
-# Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Create system user
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+RUN id -u ${user} || useradd -G www-data,root -u $uid -d /home/$user $user
 
-# Set working directory
+RUN mkdir -p \
+    storage/app/public \
+    storage/framework/cache \
+    storage/framework/sessions \
+    storage/framework/testing \
+    storage/framework/views \
+    storage/logs && \
+    touch \
+    storage/app/.gitignore \
+    storage/app/public/.gitignore \
+    storage/framework/.gitignore \
+    storage/framework/cache/.gitignore \
+    storage/framework/sessions/.gitignore \
+    storage/framework/testing/.gitignore \
+    storage/framework/views/.gitignore \
+    storage/logs/.gitignore
+
 WORKDIR /var/www
 
 USER $user
