@@ -1,3 +1,6 @@
+> [!IMPORTANT]  
+> Project is deployed [here](https://magiclog-car-factory-main-6qcxc1.laravel.cloud)
+> 
 # MagicLog Car Factory
 
 A Laravel-based car management system implementing Clean Architecture principles.
